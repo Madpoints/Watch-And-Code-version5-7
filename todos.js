@@ -37,25 +37,58 @@ var todoList = {
         var todo = this.todos[position];
         todo.completed = !todo.completed;
         this.displayTodos();
+    },
+    toggleAll: function() {
+        var totalTodos = this.todos.length;
+        var completedTodos = 0;
+        
+        for (var i = 0; i < totalTodos; i++) {
+            
+            if (this.todos[i].completed === true) {
+                completedTodos++;
+            }
+        }
+        if (completedTodos === totalTodos) {
+            
+            for (var i = 0; i < totalTodos; i++) {
+                this.todos[i].completed = false;
+            }
+        }
+        else {
+            
+            for (var i = 0; i < totalTodos; i++) {
+                this.todos[i].completed = true;
+            }
+        }
+        this.displayTodos();
     }
 };
 
-console.log("Display empty List");
+console.log("-Display empty List");
 todoList.displayTodos();
 
-console.log("Add first item");
+console.log("-Add first item");
 todoList.addTodo('item1');
 
-console.log("Add second item");
+console.log("-Add second item");
 todoList.addTodo('item2');
 
-console.log("Mark off first item");
+console.log("-Mark off first item");
 todoList.toggleCompleted(0);
 
-console.log("Change first item");
+console.log("-Change first item");
 todoList.changeTodo(0, "itemOne");
 
-console.log("Delete first and second item");
+console.log("-Mark off second item");
+todoList.toggleCompleted(1);
+
+console.log("-Toggle completed false if all todos marked off");
+todoList.toggleAll();
+
+console.log("-Toggle completed true if no todos marked off");
+todoList.toggleAll();
+
+console.log("-Delete first and second item");
 todoList.deleteTodo(0);
 todoList.deleteTodo(0);
 
