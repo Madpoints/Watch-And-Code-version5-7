@@ -2,10 +2,19 @@ var todoList = {
     todos: [],
     displayTodos: function() {
         if (this.todos.length === 0) {
-            console.log("Empty");
+            console.log("Todo list empty");
         }
         for (var i = 0; i < this.todos.length; i++){
-            console.log('Todo', i, ':', this.todos[i].todoText);    
+            var check;
+            
+            if (this.todos[i].completed === true){
+                check = "(x)";
+                console.log('Todo', i, ':', check, this.todos[i].todoText);
+            }
+            else {
+                check = "( )";
+                console.log('Todo', i, ':', check, this.todos[i].todoText);
+            }
         }
         
     },
@@ -31,11 +40,22 @@ var todoList = {
     }
 };
 
+console.log("Display empty List");
 todoList.displayTodos();
+
+console.log("Add first item");
 todoList.addTodo('item1');
+
+console.log("Add second item");
 todoList.addTodo('item2');
-// todoList.toggleCompleted(0);
-// todoList.changeTodo(0, "itemOne");
+
+console.log("Mark off first item");
+todoList.toggleCompleted(0);
+
+console.log("Change first item");
+todoList.changeTodo(0, "itemOne");
+
+console.log("Delete first and second item");
 todoList.deleteTodo(0);
 todoList.deleteTodo(0);
 
