@@ -1,19 +1,26 @@
+/*global $*/
+
 var todoList = {
     todos: [],
     displayTodos: function() {
         if (this.todos.length === 0) {
             console.log("Todo list empty");
+            $('#todos').text("Todo list empty");
+        }
+        else {
+            $('#todos').text("");    
         }
         for (var i = 0; i < this.todos.length; i++){
-            var check;
+            var check = "( ) ";
             
             if (this.todos[i].completed === true){
-                check = "(x)";
+                check = "(x) ";
                 console.log('Todo', i, ':', check, this.todos[i].todoText);
+                $('#todos').append('Todo '+ (i + 1) + ': ' + check + this.todos[i].todoText + "<br>");
             }
             else {
-                check = "( )";
                 console.log('Todo', i, ':', check, this.todos[i].todoText);
+                $('#todos').append('Todo '+ (i + 1) + ': ' + check + this.todos[i].todoText + "<br>");
             }
         }
         
@@ -64,32 +71,12 @@ var todoList = {
     }
 };
 
-console.log("-Display empty List");
-todoList.displayTodos();
-
-console.log("-Add first item");
-todoList.addTodo('item1');
-
-console.log("-Add second item");
-todoList.addTodo('item2');
-
-console.log("-Mark off first item");
-todoList.toggleCompleted(0);
-
-console.log("-Change first item");
-todoList.changeTodo(0, "itemOne");
-
-console.log("-Mark off second item");
-todoList.toggleCompleted(1);
-
-console.log("-Toggle completed false if all todos marked off");
-todoList.toggleAll();
-
-console.log("-Toggle completed true if no todos marked off");
-todoList.toggleAll();
-
-console.log("-Delete first and second item");
-todoList.deleteTodo(0);
-todoList.deleteTodo(0);
-
-
+$(document).ready(function() {
+    $('#display').on("click", function() {
+        todoList.displayTodos();
+    });
+    
+    $('#toggle').on("click", function() {
+        todoList.toggleAll();
+    });   
+});
